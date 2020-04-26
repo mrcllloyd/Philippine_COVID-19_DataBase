@@ -3,9 +3,10 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework import status
 
 from . import serializers
-from rest_framework import status
+from . import models
 
 # Create your views here.
 
@@ -103,3 +104,9 @@ class HelloViewSet(viewsets.ViewSet):
         """Handle removing an object"""
 
         return Response({'http_method': 'DELETE'})
+
+class UserViewSet(viewsets.ModelViewSet):
+    """Handles creating, creating and updating profiles."""
+
+    serializer_class = serializers.UserSerializer
+    queryset = models.User.objects.all()
